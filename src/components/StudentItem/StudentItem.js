@@ -8,8 +8,15 @@ const StudentItem = (props) => {
     //         <hr/>
     //     </div>
     // });
-    console.log("Props", props);
-    console.log('funkcija');
+
+
+
+    // const getIndex = () => {
+    //     console.log("ova se klika");
+    //     this.props.edit;
+    // }
+
+
 
     return (
 
@@ -22,8 +29,7 @@ const StudentItem = (props) => {
             <div className="col-md-3">
                 {props.student.studentSurname}
             </div>
-
-            <div className="col-1"> <button onClick={props.edit}> <i className="fa fa-edit"></i> </button> </div>
+            <div className="col-1"> <button onClick={() => props.edit(props.index)}> <i className="fa fa-edit"></i> </button> </div>
 
         </div>
     )

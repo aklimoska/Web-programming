@@ -5,12 +5,12 @@ class StudentsList extends Component {
     constructor(props) {
         super(props);
 
+
     }
 
     render() {
+
         const students = this.getStudentsPage();
-        console.log("Props: ", this.props.students)
-        console.log("Students: ", students);
         return (
             <div className="col-md-12">
                 {students}
@@ -25,7 +25,6 @@ class StudentsList extends Component {
         return this.props.students
             .map((student, index) => {
 
-                console.log("StudentItem: ", student)
                 return <StudentItem key={index} student={student} index={index}
                     edit={this.props.edit}
                 />

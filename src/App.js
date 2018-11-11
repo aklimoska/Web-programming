@@ -6,28 +6,44 @@ import EdiStudentDetails from "./components/EditStudentDetails/EditStudentDetail
 
 import './App.css';
 import { listStudents } from "./repository/studentsReposotory";
+
 class App extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             students: listStudents(),
-            showEdit: false
+            showEdit: false,
+            index: null
         };
+
+        console.log(this.state.students);
 
 
     }
 
     render() {
 
-        const toggleEdit = () => {
+        const toggleEdit = (passedIndex) => {
             let toEdit = this.state.showEdit;
             this.setState({ showEdit: !toEdit })
+            this.setState({ index: passedIndex });
         }
+        const applyData = (newStudent) => {
+
+            const oldStudents = this.state.students;
+            oldStudents[this.state.index] = newStudent;
+
+            this.setState({ students: oldStudents })
+
+            this.setState({ showEdit: false })
+        }
+
+
         let button = "";
 
         if (this.state.showEdit) {
-            button = < EdiStudentDetails />;
+            button = < EdiStudentDetails apply={applyData} selectedStudent={this.state.students[this.state.index]} />;
         } else {
 
         }
