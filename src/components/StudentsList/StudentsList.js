@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import StudentItem from '../StudentItem/StudentItem';
 
 class StudentsList extends Component {
@@ -7,10 +7,10 @@ class StudentsList extends Component {
 
     }
 
-    render(){
+    render() {
         const students = this.getStudentsPage();
         console.log("Props: ", this.props.students)
-        console.log("Students: ",students);
+        console.log("Students: ", students);
         return (
             <div className="col-md-12">
                 {students}
@@ -26,13 +26,15 @@ class StudentsList extends Component {
             .map((student, index) => {
 
                 console.log("StudentItem: ", student)
-                return <StudentItem key={index} student={student} index={index  } />
+                return <StudentItem key={index} student={student} index={index}
+                    edit={this.props.edit}
+                />
             });
-            // the filter is after the map function, so that the index attribute in map function is not reset for each page
-            // .filter((StudentItem, index) => {
-            //     return index >= offset
-            //         && index < nextPageOffset;
-            // });
+        // the filter is after the map function, so that the index attribute in map function is not reset for each page
+        // .filter((StudentItem, index) => {
+        //     return index >= offset
+        //         && index < nextPageOffset;
+        // });
     };
 }
 

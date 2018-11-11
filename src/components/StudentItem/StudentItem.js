@@ -8,19 +8,23 @@ const StudentItem = (props) => {
     //         <hr/>
     //     </div>
     // });
-    console.log(props);
+    console.log("Props", props);
+    console.log('funkcija');
 
-    return(
+    return (
 
         <div className="row">
 
 
-                <div className="col-md-6">
-                    {props.student.studentName}
-                </div>
-                <div className="col-md-6">
-                    {props.student.studentSurname}
-                </div>
+            <div className="col-md-3">
+                {props.student.studentName}
+            </div>
+            <div className="col-md-3">
+                {props.student.studentSurname}
+            </div>
+
+            <div className="col-1"> <button onClick={props.edit}> <i className="fa fa-edit"></i> </button> </div>
+
         </div>
     )
 };
