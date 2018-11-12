@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-
+import createBrowserHistory from "history/createBrowserHistory";
+import { Router, Route } from 'react-router-dom';
 import 'font-awesome/css/font-awesome.css'
 import StudentsList from "./components/StudentsList/StudentsList";
 import EdiStudentDetails from "./components/EditStudentDetails/EditStudentDetails";
+import NewStudent from "./components/NewStudent";
 
 import './App.css';
 import { listStudents } from "./repository/studentsReposotory";
@@ -29,6 +31,25 @@ class App extends Component {
             this.setState({ showEdit: !toEdit })
             this.setState({ index: passedIndex });
         }
+
+        const deleteStudent = (index) => {
+            let previous = this.state.students;
+            previous.splice(index, 1);
+
+            this.setState({ students: previous })
+
+
+        }
+
+        const addStud = (newStudent) => {
+            console.log("Jjas raboptam");
+            const oldStudents = this.state.students;
+            console.log("OLD ", oldStudents);
+            oldStudents.unshift(newStudent);
+            console.log("NEW ", oldStudents);
+            this.setState({ students: oldStudents })
+            console.log(" state students", this.state.students);
+        }
         const applyData = (newStudent) => {
 
             const oldStudents = this.state.students;
@@ -38,6 +59,7 @@ class App extends Component {
 
             this.setState({ showEdit: false })
         }
+        const customHistory = createBrowserHistory()
 
 
         let button = "";
@@ -48,17 +70,28 @@ class App extends Component {
 
         }
         return (
-            <div className="container">
-                <h3>Laboratoriska 1</h3>
+            <Router history={customHistory} >
+                <div>
+                    <Route exact={true} path='/' render={() => (
+                        <div className="container">
+                            <h3>Laboratoriska 1</h3>
 
-                {button}
+                            {button}
 
-                <div className="row">
+                            <div className="row">
 
-                    <StudentsList students={this.state.students} edit={toggleEdit} />
+                                <StudentsList students={this.state.students} edit={toggleEdit} delete={deleteStudent} />
+
+                            </div>
+                        </div>
+                    )} />
+                    <Route exact={true} path='/insert' render={() => (
+                        <NewStudent add={addStud} />
+                    )} />
 
                 </div>
-            </div>
+            </Router>
+
         );
     }
 }
